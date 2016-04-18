@@ -1,0 +1,20 @@
+A.
+0000000000600e50 d DYNAMIC 0000000000600fe8 d _GLOBAL_OFFSET_TABLE 0000000000400608 R _IO_stdin_used w _Jv_RegisterClasses
+00000000004004b4 T _Z7averagePdRd 00000000004004e2 T _Z7averageif //主要看這兩個，因為nm 這個指令即是印出object的symbol ，而程式裡有兩個相同名稱的function， 所以g++在編譯時會自動把它用輸出的type作編號來區分，這叫function overloading，例如:第一個average是(double*,double&)，所以命名就叫averagePdRd，Pd就是pointer double，Rd就是referance double；第二個average是(int,float)， 所以命名就叫averageif，i就是int、f就是float。
+0000000000600e30 d CTOR_END 0000000000600e28 d CTOR_LIST 0000000000600e40 D DTOR_END 0000000000600e38 d DTOR_LIST 0000000000400738 r FRAME_END 0000000000600e48 d JCR_END 0000000000600e48 d JCR_LIST 0000000000601018 A bss_start 0000000000601008 D __data_start 00000000004005c0 t __do_global_ctors_aux 0000000000400420 t __do_global_dtors_aux 0000000000601010 D __dso_handle w __gmon_start 0000000000600e24 d __init_array_end 0000000000600e24 d __init_array_start 00000000004005b0 T __libc_csu_fini 0000000000400520 T __libc_csu_init U __libc_start_main@@GLIBC_2.2.5 0000000000601018 A _edata 0000000000601028 A _end 00000000004005f8 T _fini 0000000000400390 T _init 00000000004003d0 T _start 00000000004003fc t call_gmon_start 0000000000601018 b completed.6531 0000000000601008 W data_start 0000000000601020 b dtor_idx.6533 0000000000400490 t frame_dummy 000000000040050a T main
+
+B.
+印出的內容為
+1 8
+4 8
+4 8
+8 8
+第一行第一個數是變數a的大小 char的大小為1byte
+第一行第二個數是用來存a位置的變數pa的大小，因為在64位元的電腦，所以是8byte
+第二行第一個數是變數b的大小 int的大小是4byte
+第二行第二個數是用來存b位置的變數pb的大小，因為在64位元的電腦，所以是8byte
+第三行第一個數是變數c的大小 float的大小是4byte
+第三行第二個數是用來存c位置的變數pc的大小，因為在64位元的電腦，所以是8byte
+第四行第一個數是變數d的大小 double的大小是8byte
+第四行第二個數是用來存d位置的變數pd的大小，因為在64位元的電腦，所以是8byte
+(一般而言，在32位元的電腦，通常指標是4byte) 
